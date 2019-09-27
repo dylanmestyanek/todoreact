@@ -1,5 +1,9 @@
 body {
   width: 100%;
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .App {
@@ -9,29 +13,48 @@ body {
   justify-content: center;
   align-items: center;
 
-  * {
-    // border: 1px solid black;
+  .search-container {
+    display: flex;
+    justify-content: space-evenly;
+    width: 30%;
+    padding-bottom: 20px;
   }
 }
 
-ul {
+.task-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   list-style-type: none;
+  background: rgba(240, 240, 240, .8);
+  width: 30%;
+  margin: 0 auto;
+  height: 300px;
+  
+  li {
+    text-align: left;
+
+  }
 }
+
 .task-container { 
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
   font-size: 1.4rem;
+  width: 100%;
+  margin: 0 auto;
 
   button {
     background: transparent;
     border: none;
-    padding: 5px;
     outline: none;
 
     i {
       color: red;
       font-size: 1.2rem;
-      // padding: 8px 8px 8px 8px;
     }
+
   }
 }

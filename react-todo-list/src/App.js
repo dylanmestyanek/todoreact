@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './App.scss';
 
+import TodoItem from "./TodoItem";
+
 function App() {
   const [items, setItems] = useState([]);
   const [task, setTask] = useState('');
@@ -11,42 +13,35 @@ function App() {
 
   const addTask = () => {
     task !== '' && setItems([...items, {value: task, completed: false, id: Date.now()}]);
-    setTask('');
   }
 
-  const toggleCompleted = (value) => {
-  //  setItems([...items, {value: "test", completed: true}])
-  };
-
-  const removeTask = (item) => {
-    let filteredArr = items.filter(task => task.id !== item.id && item)
-    setItems(filteredArr);
-  };
-  
+  const handleSubmit = e => {
+    e.preventDefault();
+    setTask('');
+  }
  
 
   return (
-    <div className="App">
+    <form onSubmit={(e) => handleSubmit(e)} className="App">
       <h1>To-Do List</h1>
-      <input 
-        type="text" 
-        placeholder="Enter Task"
-        value={task}
-        onChange={(e) => handleChange(e)}
-      />
-      <button onClick={addTask}>Add Task</button>
+      <div className="search-container">
+        <input 
+          type="text" 
+          placeholder="Enter Task"
+          value={task}
+          onChange={(e) => handleChange(e)}
+        />
+        <button onClick={addTask}>Add Task</button>
+      </div>  
 
-      <ul>
-      {
-        items.map(item => 
-          <div className="task-container">
-            <li><input type="checkbox" onChange={toggleCompleted} />{item.value}</li>
-            <button aria-label="delete" onClick={() => removeTask(item)}><i class="fas fa-trash-alt"></i></button>
-          </div>
-        )
-      }
-      </ul>
-    </div>
+      <div className="task-list">
+        {
+          items.map((item, index) => 
+            <TodoItem key={index} item={item} items={items} setItems={setItems} />
+          )
+        }
+      </div>
+    </form>
   );
 }
 
